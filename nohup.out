@@ -1,0 +1,52 @@
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+ * Restarting with stat
+127.0.0.1 - - [19/Jun/2015 10:47:57] "POST /users/ HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jun/2015 10:47:57] "POST /users/ HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jun/2015 10:47:57] "POST /users/ HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jun/2015 10:47:57] "POST /users/ HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jun/2015 10:47:57] "POST /users/ HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jun/2015 10:47:57] "POST /transaction/ HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jun/2015 10:47:57] "POST /transaction/ HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jun/2015 10:47:57] "POST /transaction/ HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jun/2015 10:47:57] "POST /transaction/ HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jun/2015 10:47:57] "POST /transaction/ HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jun/2015 10:47:57] "GET /users/ HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jun/2015 10:47:57] "GET /users/1 HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jun/2015 10:47:57] "GET /users/2 HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jun/2015 10:47:57] "GET /users/3 HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jun/2015 10:47:57] "POST /transaction/ HTTP/1.1" 500 -
+127.0.0.1 - - [19/Jun/2015 10:47:57] "POST /transaction/ HTTP/1.1" 500 -
+127.0.0.1 - - [19/Jun/2015 10:47:57] "POST /transaction/ HTTP/1.1" 500 -
+Databse url is /Users/zeigerc/env/backend/database.db
+Databse url is /Users/zeigerc/env/backend/database.db
+Databse url is /Users/zeigerc/env/backend/database.db
+Databse url is /Users/zeigerc/env/backend/database.db
+Databse url is /Users/zeigerc/env/backend/database.db
+Databse url is /Users/zeigerc/env/backend/database.db
+Entered /transaction/ withe user_id_1=1 and user_id_2=2
+Databse url is /Users/zeigerc/env/backend/database.db
+Entered /transaction/ withe user_id_1=1 and user_id_2=5
+Databse url is /Users/zeigerc/env/backend/database.db
+Entered /transaction/ withe user_id_1=2 and user_id_2=3
+Databse url is /Users/zeigerc/env/backend/database.db
+Entered /transaction/ withe user_id_1=3 and user_id_2=1
+Databse url is /Users/zeigerc/env/backend/database.db
+Entered /transaction/ withe user_id_1=5 and user_id_2=4
+Databse url is /Users/zeigerc/env/backend/database.db
+Databse url is /Users/zeigerc/env/backend/database.db
+/users/<id> reached where user id is = 1
+Databse url is /Users/zeigerc/env/backend/database.db
+/users/<id> reached where user id is = 2
+Databse url is /Users/zeigerc/env/backend/database.db
+/users/<id> reached where user id is = 3
+Databse url is /Users/zeigerc/env/backend/database.db
+Entered /transaction/ withe user_id_1=2 and user_id_2=1
+transaction already exists
+Databse url is /Users/zeigerc/env/backend/database.db
+Entered /transaction/ withe user_id_1=4 and user_id_2=5
+transaction already exists
+Databse url is /Users/zeigerc/env/backend/database.db
+Entered /transaction/ withe user_id_1=5 and user_id_2=4
+transaction already exists
+initdb()
+Databse url is /Users/zeigerc/env/backend/database.db

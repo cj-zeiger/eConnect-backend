@@ -14,17 +14,21 @@ echo "The server is at ${host_name}users/, if this is incorrect, edit the host_n
 echo "Attempting to add a few new users"
 curl -i -X POST -d "username=cj+zeiger" "${host_name}users/"
 curl -i -X POST -d "username=john+doe" "${host_name}users/"
-curl -i -X POST -d "username=sam+smith" "${host_name}users/"   
+curl -i -X POST -d "username=sam+smith" "${host_name}users/"
+curl -i -X POST -d "username=jack+john" "${host_name}users/"
+curl -i -X POST -d "username=bob+joe" "${host_name}users/"
 
-echo "Incrementing the count for all three users."
-curl -i -X PUT "${host_name}users/cj%20zeiger"
 
-curl -i -X PUT "${host_name}users/john%20doe"
-curl -i -X PUT "${host_name}users/john%20doe"
 
-curl -i -X PUT "${host_name}users/sam%20smith"
-curl -i -X PUT "${host_name}users/sam%20smith"
-curl -i -X PUT "${host_name}users/sam%20smith"
+echo "Creating a few test transactions"
+curl -i -X POST -d "user_id_1=1&user_id_2=2" "${host_name}transaction/"
+curl -i -X POST -d "user_id_1=1&user_id_2=5" "${host_name}transaction/"
+
+curl -i -X POST -d "user_id_1=2&user_id_2=3" "${host_name}transaction/"
+
+curl -i -X POST -d "user_id_1=3&user_id_2=1" "${host_name}transaction/"
+
+curl -i -X POST -d "user_id_1=5&user_id_2=4" "${host_name}transaction/"
 
 echo -e "Now requesting a list of the database \n cj zeiger should hav a count of 1 \n john doe should have a count of 2 \n sam smith should have a count of 3"
 
@@ -33,32 +37,28 @@ curl -i -X GET "${host_name}users/"
 echo "Requesting the individual count of each user through the /users/<username> endpoint"
 
 echo "CJ Zeiger should have a count of 1"
-curl -i -X GET "${host_name}users/cj%20zeiger"
+curl -i -X GET "${host_name}users/1"
 
 echo "John Doe should have a count of 2"
-curl -i -X GET "${host_name}users/john%20doe"
+curl -i -X GET "${host_name}users/2"
 
 echo "Sam Smith should have a count of 3"
-curl -i -X GET "${host_name}users/sam%20smith"
+curl -i -X GET "${host_name}users/3"
 
 echo "Now testing some invalid requests"
+echo "cj and john already met, they should not be allowed to meet again."
 
-echo "Trying to make an invalid GET request to /users/ that contains form data when it should not."
+curl -i -X POST -d "user_id_1=2&user_id_2=1" "${host_name}transaction/"
 
-curl -i -X GET -d "username=sam+smith" "${host_name}users/"
-
-echo "Attempting a POST requesting to a specific user"
-curl -i -X POST "${host_name}users/cj%20zeiger"
-
-echo "Attampting a PUT request with a username= in the form data"
-curl -i -X PUT -d "username=cj+zeiger" "${host_name}users/"
-
+echo "and again"
+curl -i -X POST -d "user_id_1=4&user_id_2=5" "${host_name}transaction/"
+curl -i -X POST -d "user_id_1=5&user_id_2=4" "${host_name}transaction/"
 echo "Done testing with cURL"
-
-
 
 pkill -f server.py
 
 echo "Verifying database structure"
+sqlite3 database.db 'select * from users'
+echo "Transactions: "
 sqlite3 database.db 'select * from interactions'
 

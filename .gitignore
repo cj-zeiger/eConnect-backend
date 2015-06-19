@@ -145,4 +145,5 @@ Session.vim
 [Ss]cripts
 pyvenv.cfg
 pip-selfcheck.json
-
+venv
+*.pyc
