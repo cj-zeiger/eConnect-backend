@@ -88,7 +88,7 @@ def single_user_endpoint(id):
     if not result:
             abort(500)
     if request.method == 'GET':
-        return str(result[0])
+        return str(result[2])
 @app.route('/transaction/',methods=['POST'])
 def new_transaction():
     user_id_1 = request.form['user_id_1']
