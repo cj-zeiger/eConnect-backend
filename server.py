@@ -69,7 +69,7 @@ def user_exists_id(id):
 @app.route('/users/',methods=['GET','POST'])
 def user_collection():
     if request.method == 'GET':
-        return json.dumps(query_db('select * from users'))
+        return jsonify(query_db('select * from users'))
     elif request.method == 'POST':
         form_data = request.form
         username = form_data['username']
@@ -104,7 +104,7 @@ def new_transaction():
     if query1 or query2:
         #this transaction already exists
         print 'transaction already exists'
-        abort(500)
+        abort(406)
     #we are now free to add this new transaction
     n_transaction = query_db('insert into interactions (user_id_1,user_id_2,transaction_time) values (?,?,?)',[user_id_1,user_id_2,datetime.now()])
     #updating respective counts
