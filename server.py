@@ -69,7 +69,7 @@ def user_exists_id(id):
 @app.route('/users/',methods=['GET','POST'])
 def user_collection():
     if request.method == 'GET':
-        return jsonify(query_db('select * from users'))
+        return jsonify(query_db('select * from users order by count desc'))
     elif request.method == 'POST':
         form_data = request.form
         username = form_data['username']
