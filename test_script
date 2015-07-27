@@ -2,7 +2,7 @@
 host_name="http://127.0.0.1:5000/"
 
 echo "Deleting database if it exists to test init_db()"
-rm -f database.db
+#rm -f database.db
 
 echo "Starting server with nohup and putting it in the background"
 rm -f nohup.out
