@@ -68,7 +68,7 @@ def user_exists_id(id):
         return False
 
 def get_user_name(user_id):
-    query = query_db('select name from users where id=?',str(user_id),True)
+    query = query_db('select name from users where id=?',[str(user_id)],True)
     return query[0]
 
 #webpages
