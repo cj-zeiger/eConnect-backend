@@ -137,6 +137,7 @@ def get_transaction_list(user_id):
     if not user_exists_id(user_id):
         print 'get_transaction_list() called with invalid user ID'
         abort(500)
+    print str(user_id)
     query1 = query_db('select * from interactions where user_id_1 = ? order by transaction_time desc', str(user_id))
     query2 = query_db('select * from interactions where user_id_2 = ? order by transaction_time desc', str(user_id))
     merged_list = []
