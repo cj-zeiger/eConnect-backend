@@ -62,19 +62,23 @@ pip install Flask
 ##Running and other configuration changes
 ###DEBUG
 By default, the DEBUG flag is turned on. This is good for development, but needs to be off when running in a production environment for security reasons.
+
 ```python
 app.config.update(dict(
     DATABASE = os.path.join(app.root_path, 'database.db'),
     DEBUG = True
 ))
 ```
+
 Changes to
+
 ```python
 app.config.update(dict(
     DATABASE = os.path.join(app.root_path, 'database.db'),
     DEBUG = False
 ))
 ```
+
 in server.py
 ###Running
-To start the service, invoke 'gunicorn server:app' in the root of the project. The output should tell you where the service can be reached.
+To start the service, invoke `gunicorn server:app` in the root of the project. The output should tell you where the service can be reached.
