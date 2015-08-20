@@ -7,6 +7,7 @@ The backend also implements an administration panel that is served by Flask. The
 
 ##Installation
 ###Clone this repository using your ISID
+
 ```
 git clone https://<ISID>@stash.merck.com/scm/ec/econnect_backend.git
 ```
@@ -14,10 +15,13 @@ git clone https://<ISID>@stash.merck.com/scm/ec/econnect_backend.git
 Make sure the \*nix enviroment you are installing on has the latest version of sqlite3.
 ###Flask (Taken from Flask documentation)
 1. Before we install Flask, we need to make sure virtualenv is installed. (User whichever package manager is availbile)
+
 ```
 sudo easy_install virtualenv
 ```
+
 Then init a virtual environment
+
 ```
 $ mkdir myproject
 $ cd myproject
@@ -25,16 +29,22 @@ $ virtualenv venv
 New python executable in venv/bin/python
 Installing distribute............done.
 ```
+
 And activate it
+
 ```
 $ . venv/bin/activate
 ```
+
 2. Using pip, install the latest version of Flask
+
 ```
 pip install Flask
 ```
+
 ###Other python dependencies
 1. Using pip, install other python dependencies
+
 ```
 +Flask-Bcrypt==0.6.2
 +Flask-Login==0.2.11
@@ -48,6 +58,7 @@ pip install Flask
 +wheel==0.24.0
 +WTForms==2.0.2
 ```
+
 ##Running and other configuration changes
 ###DEBUG
 By default, the DEBUG flag is turned on. This is good for development, but needs to be off when running in a production environment for security reasons.
