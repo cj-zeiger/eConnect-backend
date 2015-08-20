@@ -19,11 +19,13 @@ sudo easy_install virtualenv
 ```
   Then init a virtual enviroment
 ```
-$ mkdir myproject
-$ cd myproject
-$ virtualenv venv
-New python executable in venv/bin/python
-Installing distribute............done.
+  $ mkdir myproject
+  $ cd myproject
+  $ virtualenv venv
+
+  New python executable in venv/bin/python
+
+  Installing distribute............done.
 ```
   And activate it
 ```
@@ -36,17 +38,17 @@ pip install Flask
 ###Other python dependencies
 1. Using pip, install other python dependencies
 ```
-Flask-Bcrypt==0.6.2
-Flask-Login==0.2.11
-Flask-WTF==0.12
-gunicorn==19.3.0
-itsdangerous==0.24
-Jinja2==2.7.3
-MarkupSafe==0.23
-python-bcrypt==0.3.1
-Werkzeug==0.10.4
-wheel==0.24.0
-WTForms==2.0.2
+  Flask-Bcrypt==0.6.2
+  Flask-Login==0.2.11
+  Flask-WTF==0.12
+  gunicorn==19.3.0
+  itsdangerous==0.24
+  Jinja2==2.7.3
+  MarkupSafe==0.23
+  python-bcrypt==0.3.1
+  Werkzeug==0.10.4
+  wheel==0.24.0
+  WTForms==2.0.2
 ```
 
 
@@ -54,17 +56,17 @@ WTForms==2.0.2
 ###DEBUG
 By default, the DEBUG flag is turned on. This is good for development, but needs to be off when running in a production environment for security reasons.
 ```
-app.config.update(dict(
-    DATABASE = os.path.join(app.root_path, 'database.db'),
-    DEBUG = True
-))
+  app.config.update(dict(
+      DATABASE = os.path.join(app.root_path, 'database.db'),
+      DEBUG = True
+  ))
 ```
 Changes to
 ```
-app.config.update(dict(
-    DATABASE = os.path.join(app.root_path, 'database.db'),
-    DEBUG = False
-))
+  app.config.update(dict(
+      DATABASE = os.path.join(app.root_path, 'database.db'),
+      DEBUG = False
+  ))
 ```
 in server.py
 ###Running

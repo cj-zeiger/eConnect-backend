@@ -126,11 +126,13 @@ def running():
     else:
         return 'Not Running'
 @app.route('/running/<toggle>')
-def running_toggle(onff):
+def running_toggle(toggle):
     if toggle:
         running = True
+        return 'Service now running'
     else:
         running = False
+        return 'Service now stopped'
 @app.route('/users/',methods=['GET','POST'])
 def users():
     if request.method == 'GET':
