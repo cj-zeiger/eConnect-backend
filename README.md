@@ -17,14 +17,12 @@ Make sure the \*nix enviroment you are installing on has the latest version of s
 ```
 sudo easy_install virtualenv
 ```
-Then init a virtual enviroment
+Then init a virtual environment
 ```
 $ mkdir myproject
 $ cd myproject
 $ virtualenv venv
-
 New python executable in venv/bin/python
-
 Installing distribute............done.
 ```
 And activate it
@@ -50,8 +48,6 @@ pip install Flask
 +wheel==0.24.0
 +WTForms==2.0.2
 ```
-
-
 ##Running and other configuration changes
 ###DEBUG
 By default, the DEBUG flag is turned on. This is good for development, but needs to be off when running in a production environment for security reasons.
