@@ -1,10 +1,14 @@
 #all of our imports
 import sqlite3
 from flask import (Flask, g, request, abort, json, render_template, redirect,
-    url_for, make_response)
+    url_for, make_response, flash)
 import os
 from contextlib import closing
 from datetime import datetime, date
+from flask.ext.login import LoginManager, login_user, login_required
+from flask.ext.bcrypt import check_password_hash
+from user import User
+import forms
 #app setup
 app = Flask(__name__)
 #configuration
@@ -13,8 +17,20 @@ app.config.update(dict(
     DEBUG = True
 ))
 app.config.from_object(__name__)
-app.secret_key = '\x97u\x88\x18\xb6s\x85\x1c|\x067\xfd\x97_d\xb7ub`{\xc9\xb1z\x14'
+app.secret_key = 'auoesh.bouoastuh.43,uoausoehuosth3ououea.auoub!'
 
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
+
+running = True
+
+@login_manager.user_loader
+def load_user(userid):
+    if userid == '1'.encode('UTF-8'):
+        return User()
+    else:
+        return None
 
 #database methods
 def connect_db():
@@ -53,6 +69,20 @@ def query_db(query, args=(), one=False):
     get_db().commit()
     return (rv[0] if rv else None) if one else rv
 
+def query_db_json(query, args=()):
+    cur = get_db().execute(query, args)
+    li = cur.fetchall()
+    json_list = []
+    for row in li:
+        d = {}
+        for index,name in enumerate(cur.description):
+            d[name[0]] = row[index]
+        json_list.append(d)
+    cur.close()
+    get_db().commit()
+    return json_list
+
+
 #helper methods
 def user_exists(username):
     query = query_db('select * from users where name = ?',[username],one=True)
@@ -73,21 +103,37 @@ def get_user_name(user_id):
 
 #webpages
 @app.route('/')
+@login_required
 def index():
     return render_template('index.html')
 
 @app.route('/login', methods=['GET','POST'])
 def login():
-    if request.method == 'POST':
-        response = make_response(url_for('index'))
-        #session['username'] = request.form['username']
-        return redirect(url_for('index'))
-    else:
-        return render_template('login.html')
+    form = forms.LoginForm()
+    if form.validate_on_submit():
+        if form.username.data == 'admin' and check_password_hash('$2a$12$jQtHgZe4.W2o4WTiHvcYxewEFCaoesUgKKuzSBAsU1xV1y9adCBMK', form.password.data):
+            user = User()
+            login_user(user)
+            return redirect(url_for('index'))
+        else:
+            flash('Invalid Login')
+    return render_template('login.html',form=form)
 
 #API endpoints
+@app.route('/running/')
+def running():
+    if running is True:
+        return 'Running'
+    else:
+        return 'Not Running'
+@app.route('/running/<toggle>')
+def running_toggle(onff):
+    if toggle:
+        running = True
+    else:
+        running = False
 @app.route('/users/',methods=['GET','POST'])
-def user_collection():
+def users():
     if request.method == 'GET':
         return json.dumps(query_db('select * from users order by count desc'))
     elif request.method == 'POST':
@@ -100,8 +146,12 @@ def user_collection():
             data_base_response = query_db('insert into users (name) values (?)', [username])
             return str(query_db('select id from users where name=?',[username],one=True)[0])
 
+@app.route('/users/json')
+def users_json():
+    return json.dumps(query_db_json('select * from users order by count desc'))
+
 @app.route('/users/<id>',methods=['GET'])
-def single_user_endpoint(id):
+def users_id(id):
     print'/users/<id> reached where user id is = %s' % id
     result = query_db('select * from users where id = ?',[id], one=True)
     if not result:
@@ -110,7 +160,7 @@ def single_user_endpoint(id):
         return str(result[2])
 
 @app.route('/transaction/',methods=['POST'])
-def new_transaction():
+def transaction():
     user_id_1 = request.form['user_id_1']
     user_id_2 = request.form['user_id_2']
     print "Entered /transaction/ withe user_id_1=%s and user_id_2=%s" % (str(user_id_1),str(user_id_2))
@@ -133,7 +183,7 @@ def new_transaction():
     return 'Transaction Successful'
 
 @app.route('/transaction/<int:user_id>')
-def get_transaction_list(user_id):
+def transaction_user_id(user_id):
     if not user_exists_id(user_id):
         print 'get_transaction_list() called with invalid user ID'
         abort(500)

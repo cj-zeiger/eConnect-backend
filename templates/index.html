@@ -1,1 +1,15 @@
 {% extends "layout.html" %}
+{% block content %}
+<div class='row'><h1>Service is running.</h1><button class='btn btn-default' id='refresh-btn'>Refresh</button></div>
+<div class='row'>
+  <table id="table"></table>
+</div>
+<div class='row'>
+  <button class='btn btn-default'>Start</button>
+  <button class='btn btn-default'>Stop</button>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src='/static/js/leaderboard.js'></script>
+{% endblock %}
