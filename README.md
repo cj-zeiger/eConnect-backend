@@ -7,9 +7,9 @@ The backend also implements an administration panel that is served by Flask. The
 
 ##Installation
 ###Clone this repository using your ISID
-'''
+```
 git clone https://<ISID>@stash.merck.com/scm/ec/econnect_backend.git
-'''
+```
 ###sqlite3
 Make sure the \*nix enviroment you are installing on has the latest version of sqlite3.
 ###Flask (Taken from Flask documentation)
