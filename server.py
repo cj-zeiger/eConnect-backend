@@ -34,7 +34,6 @@ def load_user(userid):
 
 #database methods
 def connect_db():
-    print 'Databse url is %s' % app.config['DATABASE']
     return sqlite3.connect(app.config['DATABASE'],detect_types=sqlite3.PARSE_DECLTYPES)
 def init_db():
     with closing(connect_db()) as db:
@@ -152,7 +151,6 @@ def users_json():
 
 @app.route('/users/<id>',methods=['GET'])
 def users_id(id):
-    print'/users/<id> reached where user id is = %s' % id
     result = query_db('select * from users where id = ?',[id], one=True)
     if not result:
             abort(500)
@@ -163,17 +161,14 @@ def users_id(id):
 def transaction():
     user_id_1 = request.form['user_id_1']
     user_id_2 = request.form['user_id_2']
-    print "Entered /transaction/ withe user_id_1=%s and user_id_2=%s" % (str(user_id_1),str(user_id_2))
     if not user_exists_id(user_id_1) or not user_exists_id(user_id_2):
         #either one or both of the users has not been registered
-        print 'one or more users does not exist'
         abort(500)
     #check to see if these users have already met
     query1 = query_db('select * from interactions where user_id_1 = ? and user_id_2 = ?',[user_id_1,user_id_2],one=True)
     query2 = query_db('select * from interactions where user_id_1 = ? and user_id_2 = ?',[user_id_2,user_id_1],one=True)
     if query1 or query2:
         #this transaction already exists
-        print 'transaction already exists'
         abort(406)
     #we are now free to add this new transaction
     n_transaction = query_db('insert into interactions (user_id_1,user_id_2,transaction_time) values (?,?,?)',[user_id_1,user_id_2,datetime.now()])
@@ -185,9 +180,7 @@ def transaction():
 @app.route('/transaction/<int:user_id>')
 def transaction_user_id(user_id):
     if not user_exists_id(user_id):
-        print 'get_transaction_list() called with invalid user ID'
         abort(500)
-    print [str(user_id)]
     query1 = query_db('select * from interactions where user_id_1 = ? order by transaction_time desc', [str(user_id)])
     query2 = query_db('select * from interactions where user_id_2 = ? order by transaction_time desc', [str(user_id)])
     merged_list = []
