@@ -14,28 +14,28 @@ git clone https://<ISID>@stash.merck.com/scm/ec/econnect_backend.git
 Make sure the \*nix enviroment you are installing on has the latest version of sqlite3.
 ###Flask (Taken from Flask documentation)
 1. Before we install Flask, we need to make sure virtualenv is installed. (User whichever package manager is availbile)
-'''
+```
 sudo easy_install virtualenv
-'''
+```
   Then init a virtual enviroment
-'''
+```
 $ mkdir myproject
 $ cd myproject
 $ virtualenv venv
 New python executable in venv/bin/python
 Installing distribute............done.
-'''
+```
   And activate it
-'''
+```
 $ . venv/bin/activate
-'''
+```
 2. Using pip, install the latest version of Flask
-'''
+```
 pip install Flask
-'''
+```
 ###Other python dependencies
 1. Using pip, install other python dependencies
-'''
+```
 Flask-Bcrypt==0.6.2
 Flask-Login==0.2.11
 Flask-WTF==0.12
@@ -47,25 +47,25 @@ python-bcrypt==0.3.1
 Werkzeug==0.10.4
 wheel==0.24.0
 WTForms==2.0.2
-'''
+```
 
 
 ##Running and other configuration changes
 ###DEBUG
 By default, the DEBUG flag is turned on. This is good for development, but needs to be off when running in a production environment for security reasons.
-'''
+```
 app.config.update(dict(
     DATABASE = os.path.join(app.root_path, 'database.db'),
     DEBUG = True
 ))
-'''
+```
 Changes to
-'''
+```
 app.config.update(dict(
     DATABASE = os.path.join(app.root_path, 'database.db'),
     DEBUG = False
 ))
-'''
+```
 in server.py
 ###Running
 To start the service, invoke 'gunicorn server:app' in the root of the project. The output should tell you where the service can be reached.
