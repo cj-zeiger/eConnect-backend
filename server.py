@@ -23,8 +23,6 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
-running = True
-
 @login_manager.user_loader
 def load_user(userid):
     if userid == '1'.encode('UTF-8'):
@@ -40,11 +38,12 @@ def init_db():
         with app.open_resource('schema.sql', mode='r') as f:
             db.cursor().executescript(f.read())
             db.commit()
+#App Context methods
 
 #always use this method when you need a refrence to the db connectoin
 #If you need to use this outside of a request, use 'with app.app_context()'
 def get_db():
-    db = getattr(g, 'db', None)
+    db = getattr(g, '_databse', None)
     if db is None:
         db = g._database = connect_db()
     return db
@@ -53,11 +52,11 @@ def get_db():
 @app.before_request
 def before_request():
     #get a database connection
-    g.db = connect_db()
+    g._database = connect_db()
 
 @app.teardown_request
 def teardown_request(exception):
-    db = getattr(g,'db',None)
+    db = getattr(g,'_database',None)
     if db is not None:
         db.close()
 
@@ -99,7 +98,13 @@ def user_exists_id(id):
 def get_user_name(user_id):
     query = query_db('select name from users where id=?',[str(user_id)],True)
     return query[0]
-
+def service_down():
+    running = query_db('select value from status where name=?', ['running'])
+    if running[0][0] == '0':
+        print 'service down boys'
+        return True
+    else:
+        return False
 #webpages
 @app.route('/')
 @login_required
@@ -121,23 +126,29 @@ def login():
 #API endpoints
 @app.route('/running/')
 def running():
-    if running is True:
+    running = query_db('select value from status where name=?', ['running'])
+    if running[0][0] == '1':
         return 'Running'
     else:
         return 'Not Running'
 @app.route('/running/<toggle>')
 def running_toggle(toggle):
-    if toggle:
-        running = True
+    db = get_db()
+    if toggle == '1':
+        db.execute('update status set value=? where name=?',['1','running'])
+        db.commit()
         return 'Service now running'
     else:
-        running = False
+        db.execute('update status set value=? where name=?',['0','running'])
+        db.commit()
         return 'Service now stopped'
 @app.route('/users/',methods=['GET','POST'])
 def users():
     if request.method == 'GET':
         return json.dumps(query_db('select * from users order by count desc'))
     elif request.method == 'POST':
+        if service_down():
+            return abort(503)
         form_data = request.form
         username = form_data['username']
         if user_exists(username):
@@ -146,7 +157,7 @@ def users():
         else:
             data_base_response = query_db('insert into users (name) values (?)', [username])
             return str(query_db('select id from users where name=?',[username],one=True)[0])
-
+#This is an endpoint for the admin panel, dont need to check if service is down
 @app.route('/users/json')
 def users_json():
     return json.dumps(query_db_json('select * from users order by count desc'))
@@ -161,6 +172,8 @@ def users_id(id):
 
 @app.route('/transaction/',methods=['POST'])
 def transaction():
+    if service_down():
+        abort(503)
     user_id_1 = request.form['user_id_1']
     user_id_2 = request.form['user_id_2']
     if not user_exists_id(user_id_1) or not user_exists_id(user_id_2):
@@ -211,6 +224,16 @@ def transaction_user_id(user_id):
 if not os.path.exists('./database.db'):
     print 'initdb()'
     init_db()
+with closing(connect_db()) as db:
+    print 'updating running status on start'
+    cur = db.execute('select * from status where name = ?', ['running'])
+    rv = cur.fetchone()
+    if not rv:
+        db.execute('insert into status values (?, ?)',['running','1'])
+    else:
+        db.execute('update status set value=? where name=?',['1','running'])
+    db.commit()
+
 
 if __name__ == '__main__':
     app.run()

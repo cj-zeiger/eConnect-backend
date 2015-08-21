@@ -1,0 +1,122 @@
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+ * Restarting with stat
+127.0.0.1 - - [21/Aug/2015 12:18:36] "POST /users/ HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1836, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1820, in wsgi_app
+    response = self.make_response(self.handle_exception(e))
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1403, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/zeigerc/env/backend/server.py", line 158, in users
+    return str(query_db('select id from users where name=?',[username],one=True)[0])
+TypeError: 'NoneType' object has no attribute '__getitem__'
+127.0.0.1 - - [21/Aug/2015 12:18:36] "POST /users/ HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1836, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1820, in wsgi_app
+    response = self.make_response(self.handle_exception(e))
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1403, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/zeigerc/env/backend/server.py", line 158, in users
+    return str(query_db('select id from users where name=?',[username],one=True)[0])
+TypeError: 'NoneType' object has no attribute '__getitem__'
+127.0.0.1 - - [21/Aug/2015 12:18:36] "POST /users/ HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1836, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1820, in wsgi_app
+    response = self.make_response(self.handle_exception(e))
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1403, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/zeigerc/env/backend/server.py", line 158, in users
+    return str(query_db('select id from users where name=?',[username],one=True)[0])
+TypeError: 'NoneType' object has no attribute '__getitem__'
+127.0.0.1 - - [21/Aug/2015 12:18:36] "POST /users/ HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1836, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1820, in wsgi_app
+    response = self.make_response(self.handle_exception(e))
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1403, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/zeigerc/env/backend/server.py", line 158, in users
+    return str(query_db('select id from users where name=?',[username],one=True)[0])
+TypeError: 'NoneType' object has no attribute '__getitem__'
+127.0.0.1 - - [21/Aug/2015 12:18:36] "POST /users/ HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1836, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1820, in wsgi_app
+    response = self.make_response(self.handle_exception(e))
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1403, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zeigerc/env/backend/venv/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/zeigerc/env/backend/server.py", line 158, in users
+    return str(query_db('select id from users where name=?',[username],one=True)[0])
+TypeError: 'NoneType' object has no attribute '__getitem__'
+127.0.0.1 - - [21/Aug/2015 12:18:36] "POST /transaction/ HTTP/1.1" 500 -
+127.0.0.1 - - [21/Aug/2015 12:18:36] "POST /transaction/ HTTP/1.1" 500 -
+127.0.0.1 - - [21/Aug/2015 12:18:36] "POST /transaction/ HTTP/1.1" 500 -
+127.0.0.1 - - [21/Aug/2015 12:18:36] "POST /transaction/ HTTP/1.1" 500 -
+127.0.0.1 - - [21/Aug/2015 12:18:36] "POST /transaction/ HTTP/1.1" 500 -
+127.0.0.1 - - [21/Aug/2015 12:18:36] "GET /users/ HTTP/1.1" 200 -
+127.0.0.1 - - [21/Aug/2015 12:18:36] "GET /users/1 HTTP/1.1" 500 -
+127.0.0.1 - - [21/Aug/2015 12:18:36] "GET /users/2 HTTP/1.1" 500 -
+127.0.0.1 - - [21/Aug/2015 12:18:37] "GET /users/3 HTTP/1.1" 500 -
+127.0.0.1 - - [21/Aug/2015 12:18:37] "POST /transaction/ HTTP/1.1" 500 -
+127.0.0.1 - - [21/Aug/2015 12:18:37] "POST /transaction/ HTTP/1.1" 500 -
+127.0.0.1 - - [21/Aug/2015 12:18:37] "POST /transaction/ HTTP/1.1" 500 -
+updating running status
+initdb()
+updating running status

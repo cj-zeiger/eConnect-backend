@@ -9,3 +9,7 @@ CREATE TABLE IF NOT EXISTS interactions(
   user_id_2 integer NOT NULL,
   transaction_time timestamp NOT NULL
 );
+CREATE TABLE if NOT EXISTS status(
+	name text NOT NULL,
+	value text NOT NULL
+);
