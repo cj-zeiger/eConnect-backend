@@ -1,6 +1,5 @@
 function updateStatus(){
   var service_status = $.ajax("/running/").done(function(data) {
-    console.log(data);
     if(data == "Running"){
       $('#service_status').html('Service is running.');
     } else {
@@ -11,6 +10,9 @@ function updateStatus(){
   });
 }
 $(document).ready(function(){
+  $('#clear-modal').on('shown.bs.modal', function () {
+    $('#myInput').focus()
+  })
   $('#refresh-btn').click(function() {
     $('#table').bootstrapTable('refresh');
   });
@@ -24,6 +26,13 @@ $(document).ready(function(){
   $('#stop-btn').click(function(){
     $.ajax('/running/0').done(function(){
       updateStatus();
+    }).fail(function() {
+      alert('Unable to connect to service');
+    });
+  });
+  $('#clear-btn').click(function(){
+    $.ajax('/clear/').done(function(){
+      location.reload();
     }).fail(function() {
       alert('Unable to connect to service');
     });

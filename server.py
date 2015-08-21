@@ -5,7 +5,7 @@ from flask import (Flask, g, request, abort, json, render_template, redirect,
 import os
 from contextlib import closing
 from datetime import datetime, date
-from flask.ext.login import LoginManager, login_user, login_required
+from flask.ext.login import LoginManager, login_user, login_required, logout_user
 from flask.ext.bcrypt import check_password_hash
 from user import User
 import forms
@@ -122,9 +122,15 @@ def login():
         else:
             flash('Invalid Login')
     return render_template('login.html',form=form)
-
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
 #API endpoints
+#webpage endpoints
 @app.route('/running/')
+@login_required
 def running():
     running = query_db('select value from status where name=?', ['running'])
     if running[0][0] == '1':
@@ -132,6 +138,7 @@ def running():
     else:
         return 'Not Running'
 @app.route('/running/<toggle>')
+@login_required
 def running_toggle(toggle):
     if toggle == '1':
         query_db('update status set value=? where name=?',['1','running'])
@@ -139,6 +146,16 @@ def running_toggle(toggle):
     else:
         query_db('update status set value=? where name=?',['0','running'])
         return 'Service now stopped'
+
+@app.route('/clear/')
+@login_required
+def clear():
+    query_db('delete from users')
+    query_db('delete from interactions')
+    flash('Database Cleared')
+    return 'Databse cleared'
+
+#iOS endpoints
 @app.route('/users/',methods=['GET','POST'])
 def users():
     if request.method == 'GET':

@@ -93,3 +93,7 @@ To change the password, do the following.
 4. Now use that function subsituting in the new password. `generate_password_hash('<new_password>')`
 5. Copy the output of that function to your clipboard. Find the login function `def login():` and replace the long random string that is the first parameter of `check_password_hash()` with the new hash you just generated.
 6. Restart the server.
+
+##TODO
+#Important!
++Right now, when data is cleared, the iOS app on client's phones are getting their data cleared. We need to implement some sort of event ID so that if a client connects to the server and has and old even ID, it will know that it has to clear its local data as it would not longer be valid. In the app's current state, users would have to uninstall and reinstall between evens to manually clear their local data.
