@@ -43,7 +43,7 @@ def init_db():
 #always use this method when you need a refrence to the db connectoin
 #If you need to use this outside of a request, use 'with app.app_context()'
 def get_db():
-    db = getattr(g, '_databse', None)
+    db = getattr(g, '_database', None)
     if db is None:
         db = g._database = connect_db()
     return db
@@ -133,14 +133,11 @@ def running():
         return 'Not Running'
 @app.route('/running/<toggle>')
 def running_toggle(toggle):
-    db = get_db()
     if toggle == '1':
-        db.execute('update status set value=? where name=?',['1','running'])
-        db.commit()
+        query_db('update status set value=? where name=?',['1','running'])
         return 'Service now running'
     else:
-        db.execute('update status set value=? where name=?',['0','running'])
-        db.commit()
+        query_db('update status set value=? where name=?',['0','running'])
         return 'Service now stopped'
 @app.route('/users/',methods=['GET','POST'])
 def users():
@@ -151,11 +148,14 @@ def users():
             return abort(503)
         form_data = request.form
         username = form_data['username']
+        print 'username is'
+        print username
         if user_exists(username):
             #user already exists in the database
             abort(500)
         else:
             data_base_response = query_db('insert into users (name) values (?)', [username])
+            get_db().commit()
             return str(query_db('select id from users where name=?',[username],one=True)[0])
 #This is an endpoint for the admin panel, dont need to check if service is down
 @app.route('/users/json')
