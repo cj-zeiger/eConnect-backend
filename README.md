@@ -82,3 +82,14 @@ app.config.update(dict(
 in server.py
 ###Running
 To start the service, invoke `gunicorn server:app` in the root of the project. The output should tell you where the service can be reached.
+
+###Admin Panel password
+The username for the admin panel is admin, and for debugging purposes, the password is admin.
+
+To change the password, do the following.
+1. Load up the virtual environment in the root directory of this project.
+2. Enter the python shell using `python`. You should now see the `>>>` prompt.
+3. Import the function we need. `from flask.ext.bcrypt import generate_password_hash`
+4. Now use that function subsituting in the new password. `generate_password_hash('<new_password>')`
+5. Copy the output of that function to your clipboard. Find the login function `def login():` and replace the long random string that is the first parameter of `check_password_hash()` with the new hash you just generated.
+6. Restart the server.

@@ -17,7 +17,7 @@ app.config.update(dict(
     DEBUG = True
 ))
 app.config.from_object(__name__)
-app.secret_key = 'auoesh.bouoastuh.43,uoausoehuosth3ououea.auoub!'
+app.secret_key = '\x14C\xf1\xa0\xfe\xb5_\x8b\x85H\x1b\xee\xdd\xd4\xa6\xcft\x9f\xecu.\xabK\xf3'
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -117,7 +117,7 @@ def login():
     if form.validate_on_submit():
         if form.username.data == 'admin' and check_password_hash('$2a$12$jQtHgZe4.W2o4WTiHvcYxewEFCaoesUgKKuzSBAsU1xV1y9adCBMK', form.password.data):
             user = User()
-            login_user(user)
+            login_user(user,remember=False)
             return redirect(url_for('index'))
         else:
             flash('Invalid Login')
